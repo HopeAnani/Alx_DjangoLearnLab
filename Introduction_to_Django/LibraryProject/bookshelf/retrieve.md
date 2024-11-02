@@ -2,7 +2,7 @@
 
 Command:
 python
-all_books = Book.objects.all()
-print(all_books)
+book = Book.objects.get(title="1984")
+print(book)
 
 Expected Output : <QuerySet [<Book: 1984>]>
