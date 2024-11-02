@@ -29,7 +29,8 @@ Expected Output: The book title will be updated in the database.
 
 Command:
 python
-book_to_delete = Book.objects.get(title="Nineteen Eighty-Four")
-book_to_delete.delete()
+from bookshelf.models import Book  
+book = Book.objects.get(title="Nineteen Eighty-Four")
+book.delete()
 
 Expected Output: <QuerySet []>
