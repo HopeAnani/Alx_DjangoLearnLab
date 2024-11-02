@@ -10,7 +10,7 @@ Expected Output: The book instance will be created in the database.
 ## Retrieve Operation
 Command:
 python
-book = Book.objects.get(title="1984")
+book = Book.objects.get(title="1984") 
 print(book)
 
 Expected Output : <QuerySet [<Book: 1984>]>
