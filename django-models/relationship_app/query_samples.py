@@ -1,5 +1,5 @@
 # relationship_app/query_samples.py
-from relationship_app.models import Author, Book, Library, Librarian
+from relationship_app.models import Author, Book, Library
 
 def query_books_by_author(author_name):
     """Query all books by a specific author."""
@@ -20,11 +20,12 @@ def list_books_in_library(library_name):
         return f"No library found with the name '{library_name}'"
 
 def get_librarian_for_library(library_name):
-    """Retrieve the librarian for a library."""
+    """Retrieve the librarian for a library without using Librarian.objects.get(library=...)."""
     try:
-        librarian = Librarian.objects.get(library__name=library_name)  # Access the related library using library__name
+        library = Library.objects.get(name=library_name)  # Get the Library instance first
+        librarian = library.librarian  # Access the related Librarian directly via OneToOneField reverse relationship
         return librarian
     except Library.DoesNotExist:
         return f"No library found with the name '{library_name}'"
-    except Librarian.DoesNotExist:
+    except AttributeError:
         return f"No librarian assigned to the library '{library_name}'"
