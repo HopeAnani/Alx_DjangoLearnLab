@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -124,4 +127,33 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'bookshelf.CustomUser'
+
+# Security settings
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True  # Redirect all non-HTTPS requests to HTTPS
+
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True # Include subdomains in HSTS policy
+SECURE_HSTS_PRELOAD = True  # Enable HSTS preload list
+SECURE_REF
+
+CSRF_COOKIE_SECURE = True  # CSRF cookie is only sent over HTTPS
+SESSION_COOKIE_SECURE = True # Session cookie is only sent over HTTPS
+CSRF_COOKIE_HTTPONLY = True
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", 'https:')
+CSP_IMG_SRC = ("'self'", 'data:')
+CSP_FONT_SRC = ("'self'", 'https:')
+
+# prevent clickjacking by disallowing the site to be rendered in an iframe
+X_FRAME_OPTIONS = 'DENY'
+
+#Prevent MIME type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable the browser's XSS filter
+SECURE_BROWSER_XSS_FILTER = True
