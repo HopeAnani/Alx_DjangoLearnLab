@@ -17,9 +17,9 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['username', 'email']  # Fields the user can update    
 
 class PostForm(forms.ModelForm):
-    class Meta:
+      class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tags']
 
 class CommentForm(forms.ModelForm):
     class Meta:
